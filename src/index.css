@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap');
+
+:root {
+  /* ===== JAMAL RAFEEQ BRAND DESIGN TOKENS ===== */
+
+  /* Primary Colors */
+  --brand-red: #ed1c24;
+  --brand-red-hover: #c9161d;
+  --brand-red-light: #fff0f1;
+  --brand-black: #111111;
+  --brand-black-soft: #252525;
+  --primary-orange: var(--brand-red);
+  --primary-orange-hover: var(--brand-red-hover);
+  --primary-orange-light: var(--brand-red-light);
+  --primary-orange-bg: rgba(237, 28, 36, 0.08);
+
+  /* Slate Colors */
+  --primary-slate: var(--brand-black-soft);
+  --primary-slate-hover: var(--brand-black);
+  --primary-slate-light: #666666;
+  --primary-slate-muted: #8a8a8a;
+
+  /* Background & Surfaces */
+  --background: #fafafa;
+  --surface-card: #FFFFFF;
+  --surface-elevated: #FFFFFF;
+
+  /* Text */
+  --text-primary: var(--brand-black-soft);
+  --text-secondary: #666666;
+  --text-muted: #8a8a8a;
+  --text-on-dark: #FFFFFF;
+
+  /* Borders */
+  --border-color: #e5e5e5;
+  --border-light: #f0f0f0;
+
+  /* Misc */
+  --shadow-sm: 0 2px 8px rgba(17, 17, 17, 0.06);
+  --shadow-md: 0 8px 24px rgba(17, 17, 17, 0.08);
+  --shadow-lg: 0 16px 40px rgba(17, 17, 17, 0.10);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection highlight using brand color */
+::selection {
+  background: rgba(237, 28, 36, 0.2);
+  color: var(--brand-black);
+}
+
+/* --- Global Skeleton Loading --- */
+.skeleton {
+    background: #e0e0e0;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.skeleton-text {
+    height: 14px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
