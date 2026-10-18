@@ -115,7 +115,7 @@ client.interceptors.response.use(
                 await refreshAccessToken();
                 return client(originalRequest);
             } catch (refreshError) {
-                redirectToLogin();
+                if (!originalRequest.skipAuthRedirect) redirectToLogin();
                 return Promise.reject(refreshError);
             }
         }

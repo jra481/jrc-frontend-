@@ -23,7 +23,6 @@ function App() {
         // Only the protected admin workspace needs session restoration. The
         // public catalogue must render without an auth API dependency.
         client.get("auth/session/", {
-            skipAuthRefresh: true,
             skipAuthRedirect: true,
             timeout: 5000,
         })
