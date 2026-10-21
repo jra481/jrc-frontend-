@@ -5,13 +5,15 @@ about, contact, and WhatsApp enquiries. Customer accounts, cart, checkout,
 wishlist, profile, and order-history UI are intentionally not part of the
 storefront.
 
-For a production build, configure `VITE_API_BASE_URL` and
-`VITE_WHATSAPP_NUMBER`, then run:
+Production uses the same-origin `/api` and `/media` paths. Vercel rewrites
+those paths to the AWS EC2 backend, so do not set `VITE_API_BASE_URL` to a
+Render URL or an EC2 IP in the Vercel production environment. Leave it unset
+or set it to `/api`. Keep `VITE_WHATSAPP_NUMBER` configured, then run:
 
 ```powershell
 npm ci
 npm run build
 ```
 
-Deploy the generated `dist/` directory to the AWS static-hosting layer (for
-example S3 + CloudFront) and configure the backend API origin/proxy separately.
+The repository's `vercel.json` contains the production proxy rules. Deploy the
+frontend to Vercel after the EC2 backend is reachable at `13.50.221.204`.
