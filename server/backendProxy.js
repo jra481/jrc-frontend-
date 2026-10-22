@@ -62,10 +62,27 @@ export async function proxyToBackend(req, res, { media = false } = {}) {
     const upstream = await fetch(target, init);
     res.statusCode = upstream.status;
 
+    // Fetch exposes multiple Set-Cookie headers separately in Node runtimes
+    // that support getSetCookie(). Preserve that array when returning the
+    // response; combining the access and refresh cookies makes browsers drop
+    // one of them and causes an apparently successful login to log out again
+    // on the first authenticated dashboard request.
+    const setCookies = typeof upstream.headers.getSetCookie === "function"
+      ? upstream.headers.getSetCookie()
+      : [];
+
     for (const [name, value] of upstream.headers) {
-      if (!HOP_BY_HOP_HEADERS.has(name.toLowerCase())) {
+      const normalizedName = name.toLowerCase();
+      if (!HOP_BY_HOP_HEADERS.has(normalizedName) && normalizedName !== "set-cookie") {
         res.setHeader(name, value);
       }
+    }
+
+    if (setCookies.length) {
+      res.setHeader("set-cookie", setCookies);
+    } else {
+      const setCookie = upstream.headers.get("set-cookie");
+      if (setCookie) res.setHeader("set-cookie", setCookie);
     }
 
     res.end(Buffer.from(await upstream.arrayBuffer()));
