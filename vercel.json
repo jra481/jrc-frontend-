@@ -15,11 +15,11 @@
   "rewrites": [
     {
       "source": "/api/:path*/",
-      "destination": "https://13-50-221-204.sslip.io/api/:path*"
+      "destination": "https://13-50-221-204.sslip.io/api/:path*/"
     },
     {
       "source": "/api/:path*",
-      "destination": "https://13-50-221-204.sslip.io/api/:path*"
+      "destination": "https://13-50-221-204.sslip.io/api/:path*/"
     },
     {
       "source": "/media/:path*",
