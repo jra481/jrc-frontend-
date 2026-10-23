@@ -1,7 +1,27 @@
 import { API_URL } from "../lib/apiUrl";
 
+const sameOriginMediaPath = (imagePath) => {
+    const value = String(imagePath || "");
+    if (!value) return null;
+
+    try {
+        const baseOrigin = typeof window === "undefined" ? "http://localhost" : window.location.origin;
+        const parsed = new URL(value, baseOrigin);
+        if (parsed.pathname.startsWith("/media/")) {
+            return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+        }
+    } catch {
+        // Leave malformed or non-media URLs unchanged for the caller.
+    }
+
+    return null;
+};
+
 export const getImageUrl = (imagePath) => {
     if (!imagePath) return null;
+
+    const mediaPath = sameOriginMediaPath(imagePath);
+    if (mediaPath) return mediaPath;
 
     if (/^(https?:)?\/\//i.test(imagePath)) {
         return imagePath;
