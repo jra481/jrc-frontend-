@@ -249,7 +249,9 @@
     }
 
     .contact-location .contact-address {
-        max-width: calc(100% - 28px);
+        width: min(250px, calc(100% - 28px));
+        max-width: none;
+        flex: 0 1 250px;
         text-align: center;
     }
 
