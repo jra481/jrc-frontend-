@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import GetSingle_product_Query from "../queries/GetSingle_product_Query";
 import { getProductWhatsappUrl } from "../../../config/business";
 import { getImageUrl } from "../../../utils/imageUrl";
 import defaultImage from "../../../assets/image_not_available.png";
 import DirhamAmount from "../../../components/DirhamAmount";
+import { getProductPath, slugifyProductName } from "../../../utils/productUrl";
 import "../style/Single_product.css";
 
 const toFeatures = (value) => {
@@ -14,8 +15,14 @@ const toFeatures = (value) => {
 };
 
 function Single_product() {
-    const { id } = useParams();
+    const { slug, id } = useParams();
+    const navigate = useNavigate();
     const { data = {}, isLoading, error } = GetSingle_product_Query(id);
+    useEffect(() => {
+        if (!data?.id || !data?.name) return;
+        const canonicalSlug = slugifyProductName(data.name, data.id);
+        if (slug !== canonicalSlug) navigate(getProductPath(data), { replace: true });
+    }, [data, navigate, slug]);
     const variants = Array.isArray(data.variants) ? data.variants : [];
     const [variantId, setVariantId] = useState(null);
     const selectedVariant = variants.find((item) => String(item.id) === String(variantId)) || variants[0];

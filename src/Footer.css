@@ -100,6 +100,16 @@
     align-items: flex-start;
 }
 
+.contact li > svg {
+    flex: 0 0 auto;
+    margin-top: .2em;
+}
+
+.contact-address {
+    min-width: 0;
+    line-height: 1.5;
+}
+
 .contact a {
     min-width: 0;
     overflow-wrap: anywhere;

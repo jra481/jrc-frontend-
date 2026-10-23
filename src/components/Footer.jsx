@@ -77,7 +77,7 @@ function Footer() {
                             </li>
 
                             <li>
-                                <FaMapMarkerAlt /> {BUSINESS_ADDRESS}
+                                <FaMapMarkerAlt aria-hidden="true" /> <span className="contact-address">{BUSINESS_ADDRESS}</span>
                             </li>
                         </ul>
                     </div>

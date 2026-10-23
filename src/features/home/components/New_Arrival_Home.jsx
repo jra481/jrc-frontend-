@@ -8,6 +8,7 @@ import Product_Query from "../../sale/queries/Product_Query";
 import DirhamAmount from "../../../components/DirhamAmount";
 import { getHomepageProductPricing } from "../utils/productPricing";
 import { getProductWhatsappUrl } from "../../../config/business";
+import { getProductPath } from "../../../utils/productUrl";
 
 const MAX_PRODUCTS_PER_SECTION = 9;
 const hasValue = (value) => value !== null && value !== undefined && value !== "";
@@ -104,7 +105,7 @@ function New_Arrival_Home({
 
                             return (
                                 <article key={item.id} className="new-product-card">
-                                    <div className="image-container" onClick={() => navigate(`/single/${item.id}`)} role="button" tabIndex={0} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") navigate(`/single/${item.id}`); }}>
+                                    <div className="image-container" onClick={() => navigate(getProductPath(item))} role="button" tabIndex={0} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") navigate(getProductPath(item)); }}>
                                         <img
                                             src={image ? getImageUrl(image) : defaultImage}
                                             alt={`${item.name || "Product"} product image`}
@@ -113,7 +114,7 @@ function New_Arrival_Home({
                                         />
                                         {hasOffer && <span className="badge-offer">{discountPercentage}% OFF</span>}
                                         {showNewBadge && item.is_active && <span className="badge-new">NEW</span>}
-                                        <button type="button" className="quick-add-btn" onClick={(event) => { event.stopPropagation(); navigate(`/single/${item.id}`); }}>VIEW PRODUCT</button>
+                                        <button type="button" className="quick-add-btn" onClick={(event) => { event.stopPropagation(); navigate(getProductPath(item)); }}>VIEW PRODUCT</button>
                                     </div>
 
                                     <div className="product-details">

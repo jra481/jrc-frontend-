@@ -3,6 +3,7 @@ import "../styles/ProductCard.css";
 import { useNavigate } from "react-router-dom";
 
 import { getProductWhatsappUrl } from "../../../config/business";
+import { getProductPath } from "../../../utils/productUrl";
 import { getImageUrl } from "../../../utils/imageUrl";
 import defaultImage from "../../../assets/image_not_available.png";
 import DirhamAmount from "../../../components/DirhamAmount";
@@ -67,7 +68,7 @@ function Product_card({ products = [], isLoading, error, page = 1, pageSize = 14
             const showOriginalPrice = hasOffer && hasValue(originalPrice) && hasValue(displayPrice) && String(originalPrice) !== String(displayPrice);
             const availability = getAvailability(product, firstVariant, firstUnit);
             const whatsappUrl = getProductWhatsappUrl(product, product.id);
-            const openProduct = () => navigate(`/single/${product.id}`);
+            const openProduct = () => navigate(getProductPath(product));
 
             return <article className="product_card" key={product.id} role="link" tabIndex={0} aria-label={`View ${product.name || "product"}`} onClick={openProduct} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); openProduct(); } }}>
                 <div className="product_img">

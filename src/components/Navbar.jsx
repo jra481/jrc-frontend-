@@ -4,6 +4,7 @@ import { IoClose, IoMenu, IoSearch } from "react-icons/io5";
 
 import navbarlogo from "../assets/jamal-rafeeq-logo-transparent.png";
 import Product_Query from "../features/sale/queries/Product_Query";
+import { getProductPath } from "../utils/productUrl";
 import "../Navbar.css";
 
 const links = [
@@ -63,7 +64,7 @@ function Navbar() {
                         <div className="search_wrapper">
                             <input className={`nav_search_input ${searchOpen ? "open" : ""}`} value={searchText} onChange={(event) => { setSearchText(event.target.value); setSearchOpen(true); }} onKeyDown={(event) => { if (event.key === "Enter") goToSearch(); if (event.key === "Escape") closeSearch(); }} placeholder="Search products" aria-label="Search products" />
                             <button type="button" className="input-search-button input_search_icon" onClick={() => searchOpen && searchText.trim() ? goToSearch() : setSearchOpen(true)} aria-label={searchOpen ? "Submit product search" : "Open product search"}><IoSearch size={22} /></button>
-                            {searchOpen && debouncedSearch.length >= 2 && <div className="search-suggestions" role="listbox" aria-label="Product suggestions">{suggestionsLoading && <p>Searching…</p>}{!suggestionsLoading && suggestions.length === 0 && <p>No matching products</p>}{suggestions.map((product) => <button type="button" role="option" key={product.id} onClick={() => { navigate(`/single/${product.id}`); closeSearch(); }}>{product.name}</button>)}<button type="button" className="search-suggestion-all" onClick={() => goToSearch()}>See all results for “{debouncedSearch}”</button></div>}
+                            {searchOpen && debouncedSearch.length >= 2 && <div className="search-suggestions" role="listbox" aria-label="Product suggestions">{suggestionsLoading && <p>Searching…</p>}{!suggestionsLoading && suggestions.length === 0 && <p>No matching products</p>}{suggestions.map((product) => <button type="button" role="option" key={product.id} onClick={() => { navigate(getProductPath(product)); closeSearch(); }}>{product.name}</button>)}<button type="button" className="search-suggestion-all" onClick={() => goToSearch()}>See all results for “{debouncedSearch}”</button></div>}
                         </div>
                     </div>
                 </div>

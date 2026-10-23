@@ -38,6 +38,7 @@ function Router() {
                 <Route path='products' element={<LegacyFindProductsRedirect />} />
                 <Route path='/about' element={<About />} />
 
+                <Route path="/single/:slug/:id" element={<Single_product />} />
                 <Route path="/single/:id" element={<Single_product />} />
 
                 <Route path='admin-login' element={<AdminLogin />} />

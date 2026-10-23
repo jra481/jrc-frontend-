@@ -1,3 +1,5 @@
+import { getProductUrl } from "../utils/productUrl";
+
 const configuredWhatsappNumber = String(import.meta.env.VITE_WHATSAPP_NUMBER || "")
     .replace(/[^0-9]/g, "");
 
@@ -16,9 +18,7 @@ export function getWhatsappUrl(message) {
 }
 
 export function getProductWhatsappUrl(product, productId) {
-    const productUrl = typeof window === "undefined"
-        ? `/single/${productId}`
-        : `${window.location.origin}/single/${productId}`;
+    const productUrl = getProductUrl(product, productId);
     const message = [
         "Hello, I would like to enquire about this product.",
         "",
