@@ -3,7 +3,36 @@
 .find-products-eyebrow { margin: 0 0 8px; color: var(--brand-red-hover); font-size: .72rem; font-weight: 800; letter-spacing: .16em; }
 .page_title { margin: 0 0 8px; color: var(--brand-black-soft); font: 600 clamp(2.1rem, 5vw, 4rem) / 1.1 "Playfair Display", Georgia, serif; }
 .title_description { max-width: 640px; margin: 0; color: var(--text-secondary); line-height: 1.7; }
-.mobile-filter-toggle { display: none; }
+.mobile-filter-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 1px solid var(--brand-red);
+    border-radius: 10px;
+    background: var(--brand-red);
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    font-size: .82rem;
+    font-weight: 800;
+    letter-spacing: .02em;
+    white-space: nowrap;
+    transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.mobile-filter-toggle:hover {
+    border-color: var(--brand-red-hover);
+    background: var(--brand-red-hover);
+    box-shadow: 0 8px 18px rgb(135 0 43 / 16%);
+}
+.mobile-filter-toggle:active {
+    transform: translateY(1px);
+}
+.mobile-filter-toggle:focus-visible {
+    outline: 3px solid rgb(135 0 43 / 22%);
+    outline-offset: 3px;
+}
 .find-products-shortcuts { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 28px; }
 .find-products-shortcuts a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border: 1px solid #dfe7e2; border-radius: 999px; background: #fff; color: var(--brand-black-soft); font-size: .78rem; font-weight: 700; text-decoration: none; transition: border-color .2s ease, background .2s ease, color .2s ease; }
 .find-products-shortcuts a:hover, .find-products-shortcuts a:focus-visible { border-color: var(--brand-red); background: var(--brand-red); color: #fff; outline: none; }
@@ -41,7 +70,8 @@
 
 @media (max-width: 620px) {
     .salePage-main { width: min(100% - 24px, 1440px); padding-top: 92px; }
-    .page_header { align-items: start; }
+    .page_header { align-items: stretch; flex-direction: column; gap: 16px; }
+    .mobile-filter-toggle { width: 100%; }
     .title_description { font-size: .9rem; }
     .find-products-toolbar, .find-products-toolbar-actions { align-items: start; flex-direction: column; width: 100%; }
     .find-products-toolbar label, .find-products-toolbar select { width: 100%; }
