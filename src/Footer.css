@@ -110,6 +110,19 @@
     line-height: 1.5;
 }
 
+.contact-location {
+    align-items: center !important;
+}
+
+.contact-location > svg {
+    margin-top: 0 !important;
+}
+
+.contact-location .contact-address {
+    display: block;
+    text-align: left;
+}
+
 .contact a {
     min-width: 0;
     overflow-wrap: anywhere;
@@ -229,6 +242,15 @@
     .contact li {
         justify-content: center;
         overflow-wrap: anywhere;
+    }
+
+    .contact-location {
+        align-items: center !important;
+    }
+
+    .contact-location .contact-address {
+        max-width: calc(100% - 28px);
+        text-align: center;
     }
 
 }

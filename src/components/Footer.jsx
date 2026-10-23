@@ -76,7 +76,7 @@ function Footer() {
                                 <FaGlobe /> <a href={BUSINESS_WEBSITE} target="_blank" rel="noopener noreferrer">www.jrautospareparts.com</a>
                             </li>
 
-                            <li>
+                            <li className="contact-location">
                                 <FaMapMarkerAlt aria-hidden="true" /> <span className="contact-address">{BUSINESS_ADDRESS}</span>
                             </li>
                         </ul>
