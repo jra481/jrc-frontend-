@@ -245,6 +245,8 @@
     }
 
     .contact-location {
+        width: min(278px, 100%);
+        margin-inline: auto;
         align-items: center !important;
     }
 
