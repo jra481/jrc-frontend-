@@ -1,9 +1,8 @@
 import { getProductUrl } from "../utils/productUrl";
 
-const configuredWhatsappNumber = String(import.meta.env.VITE_WHATSAPP_NUMBER || "")
-    .replace(/[^0-9]/g, "");
+const WHATSAPP_NUMBER = "971508736155";
 
-export const WHATSAPP_NUMBER = configuredWhatsappNumber;
+export { WHATSAPP_NUMBER };
 export const BUSINESS_PHONE_NUMBERS = [
     { display: "+971 50 873 6155", href: "tel:+971508736155" },
     { display: "+971 58 895 9179", href: "tel:+971588959179" },
