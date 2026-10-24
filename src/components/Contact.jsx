@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import "./../Contact.css"
-import { getWhatsappUrl } from "../config/business";
+import { BUSINESS_ADDRESS, BUSINESS_MAP_EMBED_URL, BUSINESS_MAP_URL, getWhatsappUrl } from "../config/business";
 import Seo from "./Seo";
 
 const ContactUs = () => {
@@ -282,6 +282,25 @@ Thank you.`;
                 </form>
 
             </div>
+
+            <section className="contact-map" aria-labelledby="contact-map-title">
+                <div className="contact-map-copy">
+                    <span className="contact-tag">FIND US</span>
+                    <h2 id="contact-map-title">Visit Our Location</h2>
+                    <p>{BUSINESS_ADDRESS}</p>
+                    <a className="contact-map-link" href={BUSINESS_MAP_URL} target="_blank" rel="noopener noreferrer">
+                        Open location in Google Maps →
+                    </a>
+                </div>
+                <div className="contact-map-frame">
+                    <iframe
+                        title="Jamal Rafeeq Auto Parts Trading LLC location map"
+                        src={BUSINESS_MAP_EMBED_URL}
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                    />
+                </div>
+            </section>
 
         </div>
     </>);

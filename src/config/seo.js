@@ -1,5 +1,6 @@
 import {
     BUSINESS_EMAIL,
+    BUSINESS_MAP_URL,
     BUSINESS_PHONE_NUMBERS,
     BUSINESS_WEBSITE,
 } from "./business";
@@ -85,6 +86,7 @@ export const SITE_STRUCTURED_DATA = {
             image: getAbsoluteSiteUrl(SITE_LOGO_URL),
             telephone: BUSINESS_PHONE_NUMBERS[0]?.display,
             email: BUSINESS_EMAIL,
+            hasMap: BUSINESS_MAP_URL,
             priceRange: "AED",
             address: {
                 "@type": "PostalAddress",
