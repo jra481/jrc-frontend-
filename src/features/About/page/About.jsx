@@ -11,7 +11,7 @@ const About = () => {
     const pillars = [
         {
             title: "International Reach",
-            text: "We serve importers, distributors, and market partners across the GCC, Africa, and other international markets."
+            text: "We serve distributors, resellers, and market partners across the GCC, Africa, and other international markets."
         },
         {
             title: "Trusted Sourcing",
@@ -19,14 +19,14 @@ const About = () => {
         },
         {
             title: "Trade with Clarity",
-            text: "From product enquiry to shipment, we keep import and export communication responsive, practical, and straightforward."
+            text: "From product enquiry to shipment, we keep sourcing and export communication responsive, practical, and straightforward."
         }
     ];
 
     return (<>
         <Seo
             title="About Jamal Rafeeq | Automotive Parts Trading in Dubai"
-            description="Learn how Jamal Rafeeq Auto Parts Trading LLC sources, imports, and exports dependable automotive parts for the UAE, GCC, Africa, and international markets."
+            description="Learn how Jamal Rafeeq Auto Parts Trading LLC sources and exports dependable automotive parts for the UAE, GCC, Africa, and international markets."
             path="/about"
         />
         <div className="about-modern-wrapper">
@@ -40,7 +40,7 @@ const About = () => {
                         <span className="hero-italic">The right fit. Every journey.</span>
                     </h1>
                     <p className="hero-subtext">
-                        Jamal Rafeeq is an international automotive parts sourcing, import, and export business serving the GCC, Africa, and markets beyond the region.
+                        Jamal Rafeeq is an international automotive parts sourcing and export business serving the GCC, Africa, and markets beyond the region.
                     </p>
                     <button className="hero-modern-btn" onClick={() => navigate('/find-products')}>
                         Explore our range <span className="arrow">→</span>
@@ -62,7 +62,7 @@ const About = () => {
                             Our work connects reliable automotive parts with customers in Oman, Qatar, Bahrain, Saudi Arabia, other GCC markets, and Africa.
                         </p>
                         <p>
-                            We manage sourcing, import, and export with a clear understanding that every market has different vehicle populations, regulations, and supply needs.
+                            We manage sourcing, supply, and export with a clear understanding that every market has different vehicle populations, regulations, and supply needs.
                         </p>
 
                         <div className="story-highlights">

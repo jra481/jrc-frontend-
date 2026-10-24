@@ -160,7 +160,7 @@ function Home() {
                 <div className="section-heritage-text">
                     <span className="heritage-tag">OUR GLOBAL REACH</span>
                     <h2>Automotive parts, moving across borders.</h2>
-                    <p>Jamal Rafeeq Auto Parts Trading LLC sources, imports, and exports dependable automotive parts for customers across the GCC, Africa, and international markets.</p>
+                    <p>Jamal Rafeeq Auto Parts Trading LLC sources and exports dependable automotive parts for customers across the GCC, Africa, and international markets.</p>
                     <p>From Oman, Qatar, Bahrain, and Saudi Arabia to partners across Africa and beyond, we make sourcing and cross-border supply clear, practical, and dependable.</p>
                 </div>
 

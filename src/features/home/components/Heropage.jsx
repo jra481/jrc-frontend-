@@ -9,7 +9,7 @@ const DEFAULT_HERO_SLIDE = {
   id: "default-tech-hero",
   subtitle: "International automotive parts trade",
   title: "Source globally. Supply confidently.",
-  description: "We source, import, and export dependable automotive parts for partners across the GCC, Africa, and international markets.",
+  description: "We source and export dependable automotive parts for partners across the GCC, Africa, and international markets.",
   button_text: "Find products",
   image: defaultHeroImage,
 };

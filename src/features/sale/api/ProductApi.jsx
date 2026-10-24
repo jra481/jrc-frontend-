@@ -1,5 +1,5 @@
 
-// import client from "../../../lib/ApiClient";
+// Legacy client reference intentionally disabled.
 
 
 // export const prodectGet = async (filter = {}) => {

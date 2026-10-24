@@ -8,7 +8,7 @@ const ContactUs = () => {
     const location = useLocation();
     const [searchParams] = useSearchParams();
     const topic = searchParams.get("topic");
-    const initialSubject = topic === "import-export" ? "Import & Export Enquiry" : topic === "bulk-supply" ? "Bulk Supply Enquiry" : "";
+    const initialSubject = topic === "export-supply" ? "Export & Supply Enquiry" : topic === "bulk-supply" ? "Bulk Supply Enquiry" : "";
     const [formData, setFormData] = useState(() => ({
         name: "",
         email: "",
@@ -62,7 +62,7 @@ Thank you.`;
     return (<>
         {location.pathname.toLowerCase() === "/contact" && <Seo
             title="Contact Jamal Rafeeq Auto Parts Trading LLC | Dubai"
-            description="Contact Jamal Rafeeq Auto Parts Trading LLC in Deira, Dubai for automotive parts, sourcing, import, export, and supply enquiries."
+            description="Contact Jamal Rafeeq Auto Parts Trading LLC in Deira, Dubai for automotive parts, sourcing, export, and supply enquiries."
             path="/contact"
         />}
         <div className="contact-page">
@@ -79,7 +79,7 @@ Thank you.`;
 
                 <p>
                     Have a question about our automotive range,
-                    an import or export requirement, or a shipment?
+                    an export or supply requirement, or a shipment?
                     Fill out the form below and send us
                     a message directly on WhatsApp.
                 </p>
@@ -215,7 +215,7 @@ Thank you.`;
                             </option>
 
                             <option>
-                                Import &amp; Export Enquiry
+                                Export &amp; Supply Enquiry
                             </option>
 
                             <option>
