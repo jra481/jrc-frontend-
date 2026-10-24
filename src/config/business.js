@@ -17,13 +17,35 @@ export function getWhatsappUrl(message) {
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
-export function getProductWhatsappUrl(product, productId) {
-    const productUrl = getProductUrl(product, productId);
+function getProductPrice(product, priceOverride) {
+    return [
+        priceOverride,
+        product?.discounted_price,
+        product?.current_price,
+        product?.starting_price,
+        product?.variants?.[0]?.discounted_price,
+        product?.variants?.[0]?.price,
+    ].find((value) => value !== null && value !== undefined && value !== "");
+}
+
+function formatWhatsappPrice(value) {
+    const numericValue = Number(value);
+    return Number.isFinite(numericValue) ? `AED ${numericValue.toFixed(2)}` : "Price on enquiry";
+}
+
+export function getProductWhatsappUrl(product, _productId, options = {}) {
+    const brand = typeof product?.brand === "object" ? product.brand?.name : product?.brand;
+    const productUrl = getProductUrl(product, _productId);
+    const productLink = options.includeProductLink === false ? [] : [`Product link: ${productUrl}`];
     const message = [
         "Hello, I would like to enquire about this product.",
         "",
         `Product: ${product?.name || "Automotive product"}`,
-        `Product link: ${productUrl}`,
+        `Brand: ${brand || product?.brand_name || "Not specified"}`,
+        `Vehicle: ${product?.vehicle || "Not specified"}`,
+        `Manufacturing year: ${product?.vehicle_year || "Not specified"}`,
+        `Price: ${formatWhatsappPrice(getProductPrice(product, options.price))}`,
+        ...productLink,
         "",
         "Please confirm availability and pricing.",
     ].join("\n");

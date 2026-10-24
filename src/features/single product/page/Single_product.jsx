@@ -31,7 +31,8 @@ function Single_product() {
     const activeImage = image || selectedImages.find((item) => item.is_primary)?.image || selectedImages[0]?.image || data.image || data.product_image;
     const features = toFeatures(data.key_features);
     const fitments = Array.isArray(data.fitments) ? data.fitments : [];
-    const whatsappUrl = getProductWhatsappUrl(data, id);
+    const whatsappPrice = data.discounted_price ?? data.starting_price ?? selectedVariant?.discounted_price ?? selectedVariant?.price;
+    const whatsappUrl = getProductWhatsappUrl(data, id, { includeProductLink: false, price: whatsappPrice });
     const stock = Number(selectedVariant?.stock ?? 0);
     const availability = stock > 0 ? "In stock" : "Available on request";
     const productMeta = [
