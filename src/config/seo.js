@@ -13,7 +13,7 @@ export const SITE_LOGO_URL = jamalRafeeqLogo;
 export const FAQ_ITEMS = [
     {
         question: "What does Jamal Rafeeq Auto Parts Trading LLC supply?",
-        answer: "Jamal Rafeeq sources, imports, and exports dependable automotive spare parts, accessories, and vehicle solutions for customers, importers, distributors, and market partners.",
+        answer: "Jamal Rafeeq sources and exports dependable automotive spare parts, accessories, and vehicle solutions for customers, distributors, and market partners.",
     },
     {
         question: "Which markets does Jamal Rafeeq serve?",
