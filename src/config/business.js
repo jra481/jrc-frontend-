@@ -11,8 +11,7 @@ export const BUSINESS_EMAIL = "jrautopartsdubai@gmail.com";
 export const BUSINESS_WEBSITE = "https://www.jrautospareparts.com";
 export const BUSINESS_ADDRESS = "Bin Thani Building, Shop No: 21, Deira, Dubai - UAE";
 export const BUSINESS_MAP_URL = "https://maps.app.goo.gl/ykB7wKTTvLD5m7cU8?g_st=awb";
-const BUSINESS_MAP_QUERY = "Jamal Rafeeq Auto Parts Trading LLC, Bin Thani Building, Shop Number 21, Deira, Dubai";
-export const BUSINESS_MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(BUSINESS_MAP_QUERY)}&output=embed`;
+export const BUSINESS_MAP_EMBED_URL = "https://www.openstreetmap.org/export/embed.html?bbox=55.3099%2C25.2697%2C55.3145%2C25.2721&layer=mapnik&marker=25.270895%2C55.31219";
 
 export function getWhatsappUrl(message) {
     if (!WHATSAPP_NUMBER) return "";
