@@ -7,6 +7,8 @@ import { getImageUrl } from "../../../utils/imageUrl";
 import defaultImage from "../../../assets/image_not_available.png";
 import DirhamAmount from "../../../components/DirhamAmount";
 import { getProductPath, slugifyProductName } from "../../../utils/productUrl";
+import Seo from "../../../components/Seo";
+import { getAbsoluteSiteUrl, getProductStructuredData } from "../../../config/seo";
 import "../style/Single_product.css";
 
 const toFeatures = (value) => {
@@ -45,7 +47,32 @@ function Single_product() {
     if (isLoading) return <main className="single-product-page"><p className="single-product-state">Loading product details…</p></main>;
     if (error || !data?.id) return <main className="single-product-page"><p className="single-product-state" role="alert">This product is not available.</p><Link to="/find-products" className="single-product-back">Find Products</Link></main>;
 
-    return <main className="single-product-page"><div className="single-product-breadcrumb"><Link to="/find-products">Find Products</Link><span>/</span><span>Product details</span><span>/</span><strong>{data.name}</strong></div><section className="single-product-layout">
+    const productPath = getProductPath(data);
+    const productUrl = getAbsoluteSiteUrl(productPath);
+    const productImageUrl = activeImage ? getAbsoluteSiteUrl(getImageUrl(activeImage)) : undefined;
+    const productSchema = getProductStructuredData(data, {
+        url: productUrl,
+        imageUrl: productImageUrl,
+        price: whatsappPrice,
+        inStock: stock > 0,
+    });
+    const breadcrumbSchema = {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: getAbsoluteSiteUrl("/") },
+            { "@type": "ListItem", position: 2, name: "Find Products", item: getAbsoluteSiteUrl("/find-products") },
+            { "@type": "ListItem", position: 3, name: data.name, item: productUrl },
+        ],
+    };
+
+    return <main className="single-product-page"><Seo
+        title={`${data.name} | Jamal Rafeeq Automotive Parts`}
+        description={data.description || `${data.name} automotive product details, vehicle compatibility, manufacturing year, availability, and price from Jamal Rafeeq.`}
+        path={productPath}
+        image={productImageUrl}
+        type="product"
+        structuredData={[productSchema, breadcrumbSchema]}
+    /><div className="single-product-breadcrumb"><Link to="/find-products">Find Products</Link><span>/</span><span>Product details</span><span>/</span><strong>{data.name}</strong></div><section className="single-product-layout">
         <div className="single-product-gallery"><div className="single-product-main-image"><span className="single-product-image-label">Jamal Rafeeq catalogue</span><img src={activeImage ? getImageUrl(activeImage) : defaultImage} alt={data.name} /></div>{selectedImages.length > 1 && <div className="single-product-thumbnails" aria-label="Product images">{selectedImages.map((item, index) => <button type="button" key={item.id || item.image} className={activeImage === item.image ? "active" : ""} onClick={() => setImage(item.image)} aria-label={`View product image ${index + 1}`}><img src={getImageUrl(item.image)} alt="" /></button>)}</div>}</div>
         <div className="single-product-copy"><div className="single-product-copy-panel"><p className="single-product-eyebrow">Automotive product</p><div className="single-product-title-row"><h1>{data.name}</h1><span className={`single-product-availability ${stock > 0 ? "is-available" : ""}`}>{availability}</span></div>{data.brand?.name && <p className="single-product-brand">{data.brand.name}</p>}<div className="single-product-price"><DirhamAmount value={data.discounted_price ?? data.starting_price} fallback="Price on enquiry" /></div>{productMeta.length > 0 && <div className="single-product-meta-grid">{productMeta.map((item) => <div key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div>}<p className="single-product-description">{data.description || "Product details are available from the automotive team."}</p>{variants.length > 1 && <div className="single-product-options"><span>Variant</span><div>{variants.map((variant) => <button type="button" key={variant.id} className={String(selectedVariant?.id) === String(variant.id) ? "active" : ""} onClick={() => { setVariantId(variant.id); setImage(null); }}>{variant.color?.name || variant.sku || `Variant ${variant.id}`}</button>)}</div></div>}{whatsappUrl ? <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="single-product-whatsapp">Enquire on WhatsApp</a> : <p className="single-product-note">WhatsApp enquiry is not configured.</p>}<p className="single-product-hint">Send a product enquiry directly to the business. No cart or checkout is required.</p></div></div>
     </section>{fitments.length > 0 && <section className="single-product-fitments"><div><p className="single-product-eyebrow">Vehicle compatibility</p><h2>Fits these vehicles</h2><p>Check the model and manufacturing years before ordering.</p></div><div className="single-product-fitment-list">{fitments.map((fitment, index) => <div key={fitment.id || index}><strong>{[fitment.vehicle_make, fitment.vehicle_model].filter(Boolean).join(" ")}</strong><span>{fitment.year_from}–{fitment.year_to}</span></div>)}</div></section>}{features.length > 0 && <section className="single-product-specs"><div><p className="single-product-eyebrow">Product overview</p><h2>Key features</h2></div><ul>{features.map((feature, index) => <li key={`${feature}-${index}`}>{feature}</li>)}</ul></section>}</main>;

@@ -1,0 +1,28 @@
+# Jamal Rafeeq Auto Parts Trading LLC
+
+> Jamal Rafeeq Auto Parts Trading LLC is an automotive parts sourcing, import, and export business based in Deira, Dubai, UAE.
+
+## Official pages
+
+- Homepage: https://www.jrautospareparts.com/
+- Find products: https://www.jrautospareparts.com/find-products
+- New arrivals: https://www.jrautospareparts.com/new-arrivals
+- About the business: https://www.jrautospareparts.com/about
+- Contact and WhatsApp enquiries: https://www.jrautospareparts.com/contact
+
+## Business facts
+
+- Location: Bin Thani Building, Shop No: 21, Deira, Dubai, United Arab Emirates
+- Phone: +971 50 873 6155
+- Email: jrautopartsdubai@gmail.com
+- Service area: UAE, GCC markets, Africa, and other international markets
+- Catalogue: Automotive spare parts, accessories, vehicle solutions, sourcing, import, and export enquiries
+
+## Product information
+
+Product names, brands, vehicle compatibility, manufacturing years, prices, availability, and images are managed through the live catalogue API. Use the individual product detail page as the source for current product information.
+
+## Machine-readable files
+
+- Sitemap: https://www.jrautospareparts.com/sitemap.xml
+- Robots: https://www.jrautospareparts.com/robots.txt

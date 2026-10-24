@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /automotive-dashboard
+Disallow: /eehook-dashboard
+Disallow: /order-dashboard
+Disallow: /orderdashboard
+Disallow: /admin-login
+Disallow: /api/
+
+Sitemap: https://www.jrautospareparts.com/sitemap.xml

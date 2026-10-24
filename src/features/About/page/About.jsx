@@ -3,6 +3,7 @@ import '../styles/About.css';
 
 import AboutFirstimage from "../../../assets/automotive-parts-workshop.png";
 import AboutSecondimage from "../../../assets/automotive-hero-workshop.png";
+import Seo from "../../../components/Seo";
 
 const About = () => {
     const navigate = useNavigate();
@@ -22,7 +23,12 @@ const About = () => {
         }
     ];
 
-    return (
+    return (<>
+        <Seo
+            title="About Jamal Rafeeq | Automotive Parts Trading in Dubai"
+            description="Learn how Jamal Rafeeq Auto Parts Trading LLC sources, imports, and exports dependable automotive parts for the UAE, GCC, Africa, and international markets."
+            path="/about"
+        />
         <div className="about-modern-wrapper">
             
             {/* Hero Section */}
@@ -102,7 +108,7 @@ const About = () => {
             </section>
 
         </div>
-    );
+    </>);
 };
 
 export default About;

@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import "./../Contact.css"
 import { getWhatsappUrl } from "../config/business";
+import Seo from "./Seo";
 
 const ContactUs = () => {
+    const location = useLocation();
     const [searchParams] = useSearchParams();
     const topic = searchParams.get("topic");
     const initialSubject = topic === "import-export" ? "Import & Export Enquiry" : topic === "bulk-supply" ? "Bulk Supply Enquiry" : "";
@@ -57,7 +59,12 @@ Thank you.`;
         if (messageWindow) messageWindow.opener = null;
     };
 
-    return (
+    return (<>
+        {location.pathname.toLowerCase() === "/contact" && <Seo
+            title="Contact Jamal Rafeeq Auto Parts Trading LLC | Dubai"
+            description="Contact Jamal Rafeeq Auto Parts Trading LLC in Deira, Dubai for automotive parts, sourcing, import, export, and supply enquiries."
+            path="/contact"
+        />}
         <div className="contact-page">
 
             <div className="contact-header">
@@ -277,7 +284,7 @@ Thank you.`;
             </div>
 
         </div>
-    );
+    </>);
 };
 
 export default ContactUs;

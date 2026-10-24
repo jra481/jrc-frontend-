@@ -5,6 +5,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import client from "../../../lib/ApiClient";
 import Product_card from "../components/Product_card";
 import Product_Query from "../queries/Product_Query";
+import Seo from "../../../components/Seo";
 import "../styles/Sale_page.css";
 
 const asArray = (value) => Array.isArray(value) ? value : Array.isArray(value?.results) ? value.results : [];
@@ -43,6 +44,8 @@ function Sale({ newArrivalsOnly = false }) {
         { enabled: showProductSuggestions && productSearch.length >= 2 },
     );
     const productSuggestions = productSuggestionData?.results || [];
+    const seoPath = newArrivalsOnly ? "/new-arrivals" : "/find-products";
+    const hasQuery = searchParams.toString().length > 0;
 
     const updateFilter = (key, value) => {
         const next = new URLSearchParams(searchParams);
@@ -66,7 +69,12 @@ function Sale({ newArrivalsOnly = false }) {
         setShowProductSuggestions(false);
     };
 
-    return <main className="salePage-main find-products-page">
+    return <><Seo
+        title={newArrivalsOnly ? "New Arrivals | Jamal Rafeeq Auto Parts" : "Find Automotive Parts | Jamal Rafeeq"}
+        description={newArrivalsOnly ? "Browse the latest automotive spare parts and accessories added to the Jamal Rafeeq catalogue." : "Search automotive spare parts by product, brand, vehicle, or manufacturing year from Jamal Rafeeq in Dubai, UAE."}
+        path={seoPath}
+        noindex={hasQuery}
+    /><main className="salePage-main find-products-page">
         <header className="page_header">
             <div className="page_head"><p className="find-products-eyebrow">{newArrivalsOnly ? "LATEST PRODUCTS" : "AUTOMOTIVE CATALOGUE"}</p><h1 className="page_title">{newArrivalsOnly ? "New Arrivals" : "Find Products"}</h1><p className="title_description">{newArrivalsOnly ? "Browse the newest spare parts added to the Jamal Rafeeq catalogue." : "Search car spare parts by product, brand, vehicle, or model year."}</p></div>
             <button type="button" className="product_count mobile-filter-toggle" onClick={() => setShowFilter((value) => !value)} aria-expanded={showFilter}>{showFilter ? "Close filters" : "Filters"}</button>
@@ -125,7 +133,7 @@ function Sale({ newArrivalsOnly = false }) {
                 <Product_card products={products} isLoading={isLoading} error={error} page={page} pageSize={pageSize} count={data?.count} onPageChange={(nextPage) => { const next = new URLSearchParams(searchParams); next.set("page", String(nextPage)); setSearchParams(next); }} />
             </section>
         </div>
-    </main>;
+    </main></>;
 }
 
 export default Sale;

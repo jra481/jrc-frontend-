@@ -8,6 +8,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Router from './Router';
 import ScrollToTop from '../components/ScrollToTop';
+import Seo from '../components/Seo';
 
 function App() {
 
@@ -45,6 +46,13 @@ function App() {
             <ScrollToTop />
 
             {!isAdminPage && <Navbar />}
+
+            {isAdminPage && <Seo
+                title="Automotive Dashboard | Jamal Rafeeq"
+                description="Jamal Rafeeq catalogue administration workspace."
+                path={location.pathname}
+                noindex
+            />}
 
             <div style={{ minHeight: 'calc(100vh - 64px)' }}>
                 <Router />

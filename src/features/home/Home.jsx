@@ -5,6 +5,7 @@ import New_Arrival_Home from "./components/New_Arrival_Home";
 import HomepageProductSection from "./components/HomepageProductSection";
 import HomepageBrandSection from "./components/HomepageBrandSection";
 import HomepageTrustBenefits from "./components/HomepageTrustBenefits";
+import HomepageFaq from "./components/HomepageFaq";
 import Homepage_Query from "./queries/Homepage_Query";
 import Product_Query from "../sale/queries/Product_Query";
 import Offer_poster from "../../hooks/offers/page/Offer_poster";
@@ -16,6 +17,8 @@ import videoOnePoster from "../../assets/automotive-hero-workshop.png";
 import videoTwoPoster from "../../assets/dubai-our-promise-bg.png";
 import automotiveWorkshopPoster from "../../assets/automotive-parts-workshop.png";
 import { getVideoMimeType } from "./homepageMedia";
+import Seo from "../../components/Seo";
+import { FAQ_ITEMS } from "../../config/seo";
 
 const asArray = (value) => {
     if (Array.isArray(value)) return value;
@@ -98,16 +101,23 @@ function Home() {
         { page_size: 100 },
         { enabled: !isLoading && !isError && homepageBrands.length === 0 }
     );
-    if (isLoading) return <HomeLoading />;
+    const seo = <Seo
+        title="Jamal Rafeeq Auto Parts | Automotive Parts in Dubai & GCC"
+        description="Find automotive spare parts, accessories, vehicle solutions, and sourcing support from Jamal Rafeeq Auto Parts Trading LLC in Dubai, UAE."
+        path="/"
+        faqItems={FAQ_ITEMS}
+    />;
+    if (isLoading) return <>{seo}<HomeLoading /></>;
 
     if (isError) {
-        return (
+        return (<>
+            {seo}
             <main className="homepage-discovery homepage-state" role="alert">
                 <h1>We couldn&apos;t load the home page</h1>
                 <p>{error?.response?.data?.detail || "Please try again in a moment."}</p>
                 <button type="button" onClick={() => refetch()}>Try again</button>
             </main>
-        );
+        </>);
     }
 
     const heroBanners = asArray(homepageData.hero_banners);
@@ -122,7 +132,8 @@ function Home() {
     const brandShowcaseSource = sparePartsEngineVideo;
     const globalReachPortraitSource = sparePartsInventoryVideo;
     const globalReachLandscapeSource = sparePartsShippingVideo;
-    return (
+    return (<>
+            {seo}
         <main className="homepage-discovery">
             <Heropage heroBanners={heroBanners} />
 
@@ -143,6 +154,8 @@ function Home() {
 
             <HomepageTrustBenefits benefits={asArray(homepageData.trust_benefits)} />
 
+            <HomepageFaq />
+
             <section className="section-heritage">
                 <div className="section-heritage-text">
                     <span className="heritage-tag">OUR GLOBAL REACH</span>
@@ -159,7 +172,7 @@ function Home() {
 
             <ContactUs />
         </main>
-    );
+    </>);
 }
 
 export default Home;
