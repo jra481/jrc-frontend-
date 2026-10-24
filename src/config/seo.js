@@ -3,10 +3,11 @@ import {
     BUSINESS_PHONE_NUMBERS,
     BUSINESS_WEBSITE,
 } from "./business";
+import jamalRafeeqLogo from "../assets/jamal-rafeeq-logo-transparent.png";
 
 export const SITE_URL = BUSINESS_WEBSITE.replace(/\/$/, "");
 export const SITE_NAME = "Jamal Rafeeq Auto Parts Trading LLC";
-export const SITE_LOGO_URL = `${SITE_URL}/tab-logo.png`;
+export const SITE_LOGO_URL = jamalRafeeqLogo;
 
 export const FAQ_ITEMS = [
     {
@@ -80,8 +81,8 @@ export const SITE_STRUCTURED_DATA = {
             "@id": `${SITE_URL}/#business`,
             name: SITE_NAME,
             url: SITE_URL,
-            logo: SITE_LOGO_URL,
-            image: SITE_LOGO_URL,
+            logo: getAbsoluteSiteUrl(SITE_LOGO_URL),
+            image: getAbsoluteSiteUrl(SITE_LOGO_URL),
             telephone: BUSINESS_PHONE_NUMBERS[0]?.display,
             email: BUSINESS_EMAIL,
             priceRange: "AED",

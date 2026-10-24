@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 import {
     SITE_NAME,
+    SITE_LOGO_URL,
     SITE_STRUCTURED_DATA,
     SITE_URL,
     getAbsoluteSiteUrl,
@@ -46,7 +47,7 @@ export default function Seo({
     title,
     description,
     path = "/",
-    image = "/tab-logo.png",
+    image = SITE_LOGO_URL,
     type = "website",
     noindex = false,
     structuredData = [],

@@ -3,8 +3,15 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
+import jamalRafeeqLogo from "../assets/jamal-rafeeq-logo-transparent.png";
 import "./../index.css";
 import App from "./App.jsx";
+
+const favicon = document.querySelector('link[rel="icon"]') || document.createElement("link");
+favicon.rel = "icon";
+favicon.type = "image/png";
+favicon.href = jamalRafeeqLogo;
+document.head.appendChild(favicon);
 
 const clientQuery = new QueryClient();
 const application = (
