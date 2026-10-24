@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import '../styles/About.css';
 
-import AboutFirstimage from "../../../assets/automotive-parts-workshop.png";
-import AboutSecondimage from "../../../assets/automotive-hero-workshop.png";
+import AboutFirstimage from "../../../assets/automotive-parts-workshop.webp";
+import AboutSecondimage from "../../../assets/automotive-hero-workshop.webp";
 import Seo from "../../../components/Seo";
 
 const About = () => {

@@ -4,7 +4,7 @@ import {
     BUSINESS_PHONE_NUMBERS,
     BUSINESS_WEBSITE,
 } from "./business";
-import jamalRafeeqLogo from "../assets/jamal-rafeeq-logo-transparent.png";
+import jamalRafeeqLogo from "../assets/jamal-rafeeq-logo-transparent.webp";
 
 export const SITE_URL = BUSINESS_WEBSITE.replace(/\/$/, "");
 export const SITE_NAME = "Jamal Rafeeq Auto Parts Trading LLC";

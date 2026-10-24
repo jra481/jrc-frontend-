@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import GetSingle_product_Query from "../queries/GetSingle_product_Query";
 import { getProductWhatsappUrl } from "../../../config/business";
 import { getImageUrl } from "../../../utils/imageUrl";
-import defaultImage from "../../../assets/image_not_available.png";
+import defaultImage from "../../../assets/image_not_available.webp";
 import DirhamAmount from "../../../components/DirhamAmount";
 import { getProductPath, slugifyProductName } from "../../../utils/productUrl";
 import Seo from "../../../components/Seo";

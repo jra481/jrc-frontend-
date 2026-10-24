@@ -1,7 +1,7 @@
 import "./../Footer.css";
 
-import footerlogo from './../assets/jamal-rafeeq-logo-transparent.png'
-import jrcBrandLogo from './../assets/jrc-auto-parts-logo-transparent.png'
+import footerlogo from './../assets/jamal-rafeeq-logo-transparent.webp'
+import jrcBrandLogo from './../assets/jrc-auto-parts-logo-transparent.webp'
 import { Link } from 'react-router-dom';
 import { FaFacebookF, FaInstagram, FaWhatsapp, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaGlobe, } from "react-icons/fa";
 import { BUSINESS_ADDRESS, BUSINESS_EMAIL, BUSINESS_PHONE_NUMBERS, BUSINESS_WEBSITE, getWhatsappUrl } from "../config/business";

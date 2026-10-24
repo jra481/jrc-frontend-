@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { IoClose, IoMenu, IoSearch } from "react-icons/io5";
 
-import navbarlogo from "../assets/jamal-rafeeq-logo-transparent.png";
+import navbarlogo from "../assets/jamal-rafeeq-logo-transparent.webp";
 import Product_Query from "../features/sale/queries/Product_Query";
 import { getProductPath } from "../utils/productUrl";
 import "../Navbar.css";

@@ -3,7 +3,7 @@ import Newarrival_Query from "../../newArrivals/queries/Newarrival_Query";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getImageUrl } from "../../../utils/imageUrl";
-import defaultImage from "../../../assets/image_not_available.png";
+import defaultImage from "../../../assets/image_not_available.webp";
 import Product_Query from "../../sale/queries/Product_Query";
 import DirhamAmount from "../../../components/DirhamAmount";
 import { getHomepageProductPricing } from "../utils/productPricing";

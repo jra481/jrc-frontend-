@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { getProductWhatsappUrl } from "../../../config/business";
 import { getProductPath } from "../../../utils/productUrl";
 import { getImageUrl } from "../../../utils/imageUrl";
-import defaultImage from "../../../assets/image_not_available.png";
+import defaultImage from "../../../assets/image_not_available.webp";
 import DirhamAmount from "../../../components/DirhamAmount";
 
 const hasValue = (value) => value !== null && value !== undefined && value !== "";

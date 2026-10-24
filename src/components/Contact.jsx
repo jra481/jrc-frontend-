@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import "./../Contact.css"
-import { BUSINESS_ADDRESS, BUSINESS_MAP_EMBED_URL, BUSINESS_MAP_URL, getWhatsappUrl } from "../config/business";
+import { BUSINESS_ADDRESS, BUSINESS_MAP_IMAGE, BUSINESS_MAP_URL, getWhatsappUrl } from "../config/business";
 import Seo from "./Seo";
 
 const ContactUs = () => {
@@ -293,12 +293,15 @@ Thank you.`;
                     </a>
                 </div>
                 <div className="contact-map-frame">
-                    <iframe
+                    <img
                         title="Jamal Rafeeq Auto Parts Trading LLC location map"
-                        src={BUSINESS_MAP_EMBED_URL}
+                        src={BUSINESS_MAP_IMAGE}
+                        alt="Map showing Jamal Rafeeq Auto Parts Trading LLC in Deira, Dubai"
                         loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
                     />
+                    <a className="contact-map-attribution" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">
+                        Map data © OpenStreetMap contributors
+                    </a>
                 </div>
             </section>
 

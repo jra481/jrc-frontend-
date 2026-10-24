@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../Heropage.css";
 import { getImageUrl } from "../../../utils/imageUrl";
 import Hero_Query from "../queries/Hero_Query";
-import defaultHeroImage from "../../../assets/automotive-hero-workshop.png";
+import defaultHeroImage from "../../../assets/automotive-hero-workshop.webp";
 
 const DEFAULT_HERO_SLIDE = {
   id: "default-tech-hero",
