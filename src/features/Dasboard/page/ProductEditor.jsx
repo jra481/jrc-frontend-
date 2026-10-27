@@ -5,6 +5,7 @@ import { FiChevronDown, FiImage, FiSave, FiX } from "react-icons/fi";
 import { LoadingState } from "../components/AdminPrimitives";
 import { createResource, deleteResource, flattenApiErrors, getErrorMessage, getResource, listResource, updateResource } from "../services/adminApi";
 import { getImageUrl } from "../../../utils/imageUrl";
+import defaultImage from "../../../assets/image_not_available.webp";
 import "../styles/ProductEditor.css";
 
 const emptyProduct = {
@@ -221,7 +222,7 @@ export default function ProductEditor({ readOnly = false }) {
             </section>
             <section className="product-editor-section">
                 <button type="button" className="product-section-heading" onClick={() => setFitmentsOpen((current) => !current)}>
-                    <span><strong>Vehicle compatibility</strong><small className="product-section-heading-hint">Add every compatible model and manufacturing-year range.</small></span>
+                    <span><strong>Vehicle compatibility (optional)</strong><small className="product-section-heading-hint">Add compatible models and manufacturing-year ranges if available.</small></span>
                     <FiChevronDown className={fitmentsOpen ? "section-open" : ""} />
                 </button>
                 {fitmentsOpen && <div className="product-section-content fitments-content">
@@ -241,7 +242,7 @@ export default function ProductEditor({ readOnly = false }) {
                 <div className="product-section-heading product-section-heading-static"><strong>Product Images</strong><label className="admin-button secondary product-image-upload"><FiImage /> Add Images<input hidden type="file" accept="image/*" multiple onChange={(event) => { addImages(event.target.files); event.target.value = ""; }} /></label></div>
                 <div className="product-section-content">
                     <p className="field-hint">Add as many product images as you need.</p>
-                    {images.length > 0 && <div className="product-image-grid">{images.map((image, index) => <div className="product-image-item" key={idOf(image) || image.preview || `${image.image}-${index}`}><img src={image.preview || getImageUrl(image.image)} alt={`Product image ${index + 1}`} /><button type="button" className="product-image-remove" onClick={() => removeImage(index)} aria-label={`Remove product image ${index + 1}`}><FiX /></button></div>)}</div>}
+                    {images.length > 0 && <div className="product-image-grid">{images.map((image, index) => <div className="product-image-item" key={idOf(image) || image.preview || `${image.image}-${index}`}><img src={image.preview || getImageUrl(image.image)} alt={`Product image ${index + 1}`} onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = defaultImage; }} /><button type="button" className="product-image-remove" onClick={() => removeImage(index)} aria-label={`Remove product image ${index + 1}`}><FiX /></button></div>)}</div>}
                 </div>
             </section>
             <div className="product-editor-footer">

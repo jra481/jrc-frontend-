@@ -32,7 +32,7 @@ const resources = {
     categories: { label: "Categories", group: "Catalog", fields: ["name", "image", "is_active"], columns: ["name", "image", "is_active"] },
     subcategories: { label: "Subcategories", group: "Catalog", fields: ["category", "name", "image", "is_active"], columns: ["id", "category", "name", "image", "is_active"] },
     offers: { label: "Offers", group: "Catalog", fields: ["title", "description", "image", "discount_percentage", "start_date", "end_date", "is_active"], columns: ["title", "discount_percentage", "start_date", "end_date", "is_active"] },
-    brands: { label: "Brands", itemLabel: "Brand", group: "Catalog", fields: ["name", "logo"], columns: ["name", "logo"] },
+    brands: { label: "Brands", itemLabel: "Brand", group: "Catalog", fields: ["name", "is_active"], columns: ["name", "is_active"] },
     colors: { label: "Colors", group: "Catalog", fields: ["name", "code"], columns: ["name", "code"] },
     "unit-types": { label: "Unit Types", group: "Catalog", fields: ["name", "description"], columns: ["name", "description"] },
     units: { label: "Units", group: "Catalog", fields: ["unit_type", "name", "symbol", "description"], columns: ["name", "symbol", "unit_type", "description"] },
@@ -145,6 +145,7 @@ function fieldsFromSchema(schema, resource) {
         if (resource === "users" && ["last_login", "date_joined", "groups", "user_permissions"].includes(name)) return false;
         if (resource === "categories" && !["name", "image", "is_active"].includes(name)) return false;
         if (resource === "subcategories" && !["category", "name", "image", "is_active"].includes(name)) return false;
+        if (resource === "brands" && !["name", "is_active"].includes(name)) return false;
         if (resource === "unit-types" && !["name", "description"].includes(name)) return false;
         if (resource === "units" && !["unit_type", "name", "symbol", "description"].includes(name)) return false;
         if (resource === "product-variants" && !["product", "color", "sku", "price_type", "price", "stock"].includes(name)) return false;
@@ -801,7 +802,7 @@ function normalizeResourceValues(values, resource) {
 
 function cleanPayload(values, resource) {
     const isFileField = (key) => key === "image" || key.includes("_image") || key.includes("logo");
-    const entries = Object.entries(normalizeResourceValues(values, resource)).filter(([key, value]) => !["id", "pk", "created_at", "updated_at"].includes(key) && value !== undefined && value !== null && value !== "" && !(isFileField(key) && !(value instanceof File)));
+    const entries = Object.entries(normalizeResourceValues(values, resource)).filter(([key, value]) => !["id", "pk", "created_at", "updated_at", "slug", "logo"].includes(key) && value !== undefined && value !== null && value !== "" && !(isFileField(key) && !(value instanceof File)));
     const hasFile = entries.some(([, value]) => value instanceof File);
     if (!hasFile) return resource === "products" ? { ...Object.fromEntries(entries), emi_available: false, emi_starting_price: null } : Object.fromEntries(entries);
     const form = new FormData(); entries.forEach(([key, value]) => { if (Array.isArray(value)) value.forEach((item) => form.append(key, item)); else form.append(key, value); });

@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { FiArrowLeft, FiSave } from "react-icons/fi";
 import { createResource, getErrorMessage, getResource, updateResource } from "../services/adminApi";
 import { LoadingState } from "../components/AdminPrimitives";
+import { getImageUrl } from "../../../utils/imageUrl";
 import "../styles/HeroBannerEditor.css";
 
 const emptyBanner = { image: null, link: "", is_active: true };
@@ -44,10 +45,11 @@ export default function HeroSideBannerEditor() {
         finally { setSaving(false); }
     };
     if (loading) return <div className="admin-page"><LoadingState label="Loading hero side banner..." /></div>;
+    const previewUrl = values.image instanceof File ? URL.createObjectURL(values.image) : getImageUrl(values.image);
     return <div className="hero-banner-editor-page">
         <div className="hero-editor-heading"><div><button type="button" className="hero-back-link" onClick={() => navigate("/automotive-dashboard/hero-side-banners")}><FiArrowLeft /> Hero side banners</button><h2>Hero side banners</h2></div><div className="hero-breadcrumb">Home&nbsp; / &nbsp;Myapp&nbsp; / &nbsp;Hero side banners&nbsp; / &nbsp;{editing ? "Edit hero side banner" : "Add hero side banner"}</div></div>
         <div className="hero-editor-layout"><section className="hero-editor-card"><div className="hero-editor-form">
-            <label className="hero-editor-field"><span>Image <em>*</em></span><input type="file" accept="image/*" onChange={(event) => setValue("image", event.target.files?.[0] || null)} />{values.image && <img className="hero-upload-preview" src={values.image instanceof File ? URL.createObjectURL(values.image) : values.image} alt="Hero side preview" />}<small className="hero-field-help">The actual image file</small>{errors.image && <small>{errors.image}</small>}</label>
+            <label className="hero-editor-field"><span>Image <em>*</em></span><input type="file" accept="image/*" onChange={(event) => setValue("image", event.target.files?.[0] || null)} />{previewUrl && <img className="hero-upload-preview" src={previewUrl} alt="Hero side preview" />}<small className="hero-field-help">The actual image file</small>{errors.image && <small>{errors.image}</small>}</label>
             <label className="hero-editor-field"><span>Link</span><input type="text" value={values.link ?? ""} onChange={(event) => setValue("link", event.target.value)} /><small className="hero-field-help">A URL where the user should be redirected if they click the banner</small></label>
             <label className="hero-editor-field"><span>Is active</span><input type="checkbox" checked={Boolean(values.is_active)} onChange={(event) => setValue("is_active", event.target.checked)} /><small className="hero-field-help">Only one banner should be active at a time</small></label>
         </div>{requestError && <p className="hero-editor-error">{requestError}</p>}</section><aside className="hero-editor-actions"><button className="hero-save-button" onClick={() => save("list")} disabled={saving}><FiSave /> Save</button><button className="hero-secondary-button" onClick={() => save("another")} disabled={saving}>Save and add another</button><button className="hero-secondary-button" onClick={() => save("continue")} disabled={saving}>Save and continue editing</button></aside></div>

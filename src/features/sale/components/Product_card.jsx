@@ -73,7 +73,7 @@ function Product_card({ products = [], isLoading, error, page = 1, pageSize = 14
             return <article className="product_card" key={product.id} role="link" tabIndex={0} aria-label={`View ${product.name || "product"}`} onClick={openProduct} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); openProduct(); } }}>
                 <div className="product_img">
                     {hasOffer && hasValue(product.discount_percentage) && <div className="offer-badge">{product.discount_percentage}% OFF</div>}
-                    <img src={image ? getImageUrl(image) : defaultImage} alt={product.name || "Product"} />
+                    <img src={image ? getImageUrl(image) : defaultImage} alt={product.name || "Product"} onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = defaultImage; }} />
                 </div>
                 <div className="product_info">
                     <h3 className="product-title">{product.name}</h3>
