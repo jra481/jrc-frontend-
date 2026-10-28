@@ -225,7 +225,7 @@ export default function ProductEditor({ readOnly = false }) {
                     <FiChevronDown className={fitmentsOpen ? "section-open" : ""} />
                 </button>
                 {fitmentsOpen && <div className="product-section-content fitments-content">
-                    <div className="fitments-toolbar"><p className="field-hint">Example: Toyota Corolla · 2014–2019. Add multiple rows for multiple vehicles.</p><button type="button" className="admin-button secondary" onClick={addFitment}>Add vehicle fitment</button></div>
+                    <div className="fitments-toolbar"><p className="field-hint">Optional: leave this section empty if no fitment information is available. Example: Toyota Corolla · 2014–2019.</p><button type="button" className="admin-button secondary" onClick={addFitment}>Add vehicle fitment</button></div>
                     {(product.fitments || []).length === 0 && <p className="fitments-empty">No vehicle compatibility rows yet.</p>}
                     {(product.fitments || []).map((fitment, index) => <div className="fitment-row" key={fitment.id || index}>
                         <TextField label={`Vehicle make ${index + 1}`} value={fitment.vehicle_make} onChange={(value) => updateFitment(index, "vehicle_make", value)} />
@@ -296,12 +296,15 @@ function normalizeProduct(data = {}) {
 }
 
 function makeProductPayload(product) {
-    const fitments = (product.fitments || []).map((fitment) => ({
-        vehicle_make: String(fitment.vehicle_make || "").trim(),
-        vehicle_model: String(fitment.vehicle_model || "").trim(),
-        year_from: Number(fitment.year_from),
-        year_to: Number(fitment.year_to),
-    }));
+    const fitments = (product.fitments || [])
+        .filter((fitment) => [fitment.vehicle_make, fitment.vehicle_model, fitment.year_from, fitment.year_to]
+            .some((value) => String(value ?? "").trim()))
+        .map((fitment) => ({
+            vehicle_make: String(fitment.vehicle_make || "").trim(),
+            vehicle_model: String(fitment.vehicle_model || "").trim(),
+            year_from: Number(fitment.year_from),
+            year_to: Number(fitment.year_to),
+        }));
     const primaryFitment = fitments[0];
     const values = {
         ...product,
