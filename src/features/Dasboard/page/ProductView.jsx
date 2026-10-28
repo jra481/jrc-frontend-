@@ -41,6 +41,7 @@ function keyFeatures(value) {
 }
 
 const money = (value) => value === null || value === undefined || value === "" ? EMPTY_VALUE : <DirhamAmount value={value} />;
+const imagePath = (value) => typeof value === "object" && value !== null ? value.url || value.image || value.path : value;
 
 export default function ProductView() {
     const { id } = useParams();
@@ -139,7 +140,6 @@ export default function ProductView() {
                     <div><small>Vehicle</small><p>{product.vehicle || EMPTY_VALUE}</p></div>
                     <div><small>Manufacturing years</small><p>{product.vehicle_year || EMPTY_VALUE}</p></div>
                     <div><small>Offer</small><p>{lookupLabel(product.offer, references.offers)}</p></div>
-                    <div><small>Seller</small><p>{product.seller_name || EMPTY_VALUE}</p></div>
                     <div><small>Shipping fee</small><p>{money(product.shipping_fee)}</p></div>
                     <div><small>Delivery time</small><p>{product.estimated_delivery_time || EMPTY_VALUE}</p></div>
                     <div><small>Warranty</small><p>{product.warranty_info || EMPTY_VALUE}</p></div>
@@ -168,10 +168,10 @@ export default function ProductView() {
                                 <span>{variant.price_type === "multiple" ? "Multiple price" : <>Single price · {money(variant.price)} · Stock {variant.stock ?? 0}</>}</span>
                                 {variant.sku && <small>SKU: {variant.sku}</small>}
                             </div>
-                            {primary?.image && <img src={getImageUrl(primary.image)} alt={colorLabel} onError={(event) => { event.currentTarget.src = defaultImage; }} />}
+                            {imagePath(primary?.image) && <img src={getImageUrl(imagePath(primary.image))} alt={colorLabel} onError={(event) => { event.currentTarget.src = defaultImage; }} />}
                         </div>
                         {variant.price_type === "multiple" && <div className="product-view-units"><div className="product-view-units-heading"><span>Unit</span><span>Price / Stock</span></div>{variant.units.map((unit, unitIndex) => <div key={idOf(unit) || unitIndex}><span>{lookupLabel(unit.unit_type, references.unitTypes)} / {lookupLabel(unit.unit, references.units)}{unit.sku && <small>SKU: {unit.sku}</small>}</span><strong>{money(unit.price)} · Stock {unit.stock ?? 0}</strong></div>)}</div>}
-                        <div className="product-view-images">{variant.images.length ? variant.images.map((image, imageIndex) => <img key={idOf(image) || imageIndex} src={getImageUrl(image.image)} alt={`${product.name} ${colorLabel} image ${imageIndex + 1}`} onError={(event) => { event.currentTarget.src = defaultImage; }} />) : <img src={defaultImage} alt="Default product" />}</div>
+                        <div className="product-view-images">{variant.images.length ? variant.images.map((image, imageIndex) => <img key={idOf(image) || imageIndex} src={getImageUrl(imagePath(image.image))} alt={`${product.name} ${colorLabel} image ${imageIndex + 1}`} onError={(event) => { event.currentTarget.src = defaultImage; }} />) : <img src={defaultImage} alt="Default product" />}</div>
                     </article>;
                 }) : <EmptyState title="No variants" description="This product has no variants yet." />}
             </section>

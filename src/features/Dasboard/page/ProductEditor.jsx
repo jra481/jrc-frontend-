@@ -17,7 +17,6 @@ const emptyProduct = {
     vehicle_year: "",
     manufacturer: "",
     offer: "",
-    seller_name: "",
     shipping_fee: "0",
     estimated_delivery_time: "",
     warranty_info: "",
@@ -329,6 +328,7 @@ function makeProductPayload(product) {
     delete values.emi_available;
     delete values.emi_starting_price;
     delete values.manual_related_products;
+    delete values.seller_name;
     delete values.promotional_banner_image;
     return values;
 }

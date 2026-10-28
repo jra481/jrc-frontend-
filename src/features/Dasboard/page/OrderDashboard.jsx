@@ -36,7 +36,7 @@ const resources = {
     colors: { label: "Colors", group: "Catalog", fields: ["name", "code"], columns: ["name", "code"] },
     "unit-types": { label: "Unit Types", group: "Catalog", fields: ["name", "description"], columns: ["name", "description"] },
     units: { label: "Units", group: "Catalog", fields: ["unit_type", "name", "symbol", "description"], columns: ["name", "symbol", "unit_type", "description"] },
-    products: { label: "Products", group: "Catalog", fields: ["name", "description", "key_features", "brand", "vehicle", "vehicle_year", "offer", "seller_name", "shipping_fee", "estimated_delivery_time", "warranty_info", "current_viewers_count", "promotional_banner_image", "promotional_banner_link", "is_active"], columns: ["id", "name", "product_image", "seller_name", "is_active"] },
+    products: { label: "Products", group: "Catalog", fields: ["name", "description", "key_features", "brand", "vehicle", "vehicle_year", "offer", "shipping_fee", "estimated_delivery_time", "warranty_info", "current_viewers_count", "promotional_banner_image", "promotional_banner_link", "is_active"], columns: ["id", "name", "product_image", "is_active"] },
     "product-variants": { label: "Product Variants", group: "Catalog", fields: ["product", "color", "sku", "price_type", "price", "stock"], columns: ["product", "color", "sku", "price_type", "price", "stock"] },
     "product-variant-units": { label: "Variant Sizes / Units", group: "Catalog", fields: ["variant", "unit_type", "unit", "sku", "price", "stock"], columns: ["variant", "unit_type", "unit", "sku", "price", "stock"] },
     "product-images": { label: "Product Images", group: "Catalog", fields: ["variant", "image", "is_primary", "position"], columns: ["variant", "image", "is_primary", "position"] },
@@ -141,7 +141,7 @@ function fieldsFromSchema(schema, resource) {
     const fields = fieldList.filter((field) => {
         const name = field.name || field.key;
         if (resource === "products" && ["emi_available", "emi_starting_price"].includes(name)) return false;
-        if (resource === "products" && ["product_type", "has_variants"].includes(name)) return false;
+        if (resource === "products" && ["product_type", "has_variants", "seller_name"].includes(name)) return false;
         if (resource === "users" && ["last_login", "date_joined", "groups", "user_permissions"].includes(name)) return false;
         if (resource === "categories" && !["name", "image", "is_active"].includes(name)) return false;
         if (resource === "subcategories" && !["category", "name", "image", "is_active"].includes(name)) return false;
@@ -285,10 +285,12 @@ function relatedProductImageMap(variants, images) {
     const variantById = new Map(variants.map((variant) => [String(recordId(variant)), variant]));
     const productImages = new Map();
     images.forEach((image) => {
-        const variantId = image?.variant?.id ?? image?.variant;
+        const variantId = image?.variant?.id ?? image?.variant?.pk ?? image?.variant_id ?? image?.variant;
         const variant = variantById.get(String(variantId));
-        const productId = variant?.product?.id ?? variant?.product;
-        const imageUrl = typeof image?.image === "string" ? getImageUrl(image.image) : typeof image?.url === "string" ? getImageUrl(image.url) : null;
+        const productId = variant?.product?.id ?? variant?.product?.pk ?? variant?.product_id ?? variant?.product;
+        const imageValue = image?.image;
+        const imagePath = typeof imageValue === "object" ? imageValue?.url || imageValue?.image || imageValue?.path : imageValue || image?.url || image?.path;
+        const imageUrl = typeof imagePath === "string" ? getImageUrl(imagePath) : null;
         if (!productId || !imageUrl) return;
         if (!productImages.has(String(productId)) || image.is_primary) productImages.set(String(productId), imageUrl);
     });
@@ -384,7 +386,6 @@ function Overview({ data, loading }) {
     const catalogRows = [
         ["Products", "products", "#ed1c24"],
         ["Brands", "brands", "#252525"],
-        ["Product variants", "product-variants", "#8a8a8a"],
     ].map(([label, key, color]) => ({ label, color, count: resourceCount(key) }));
     const cards = [
         ["Total products", resourceCount("products"), FiPackage, "orange"],
